@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Exemplo01 extends BaseExemplo {
 
-    @Override
+    @Override // sobrescreve o executar da base Exemplos
     public void executar(){
         // Texto que será analisado
         String texto = "12345";
