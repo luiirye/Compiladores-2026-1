@@ -13,6 +13,10 @@ public class App {
         //questao02 exemplo = new questao02();
         //questao03 exemplo = new questao03();
         questao04 exemplo = new questao04();
+        questao05 exemplo = new questao05();
+        questao06 exemplo = new questao06();
+        questao07 exemplo = new questao07();
+        questao08 exemplo = new questao08();
         exemplo.executar();
     }
 }
