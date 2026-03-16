@@ -9,9 +9,10 @@ public class questao02 extends Base {
     //@Override
     public void executar(){
         
-        String texto = "10.5 3.14 0.99";
-        String regra = "(\\d^[])"; // ^ -> início da string, $ -> fim da string, [0-9] -> dígitos de 0 a 9, {6} -> exatamente 6 dígitos
-
+        String texto = "10.5777";
+        String regra = "^[0-9]+(.[0-9]*)$";
+        // números + ponto + dígitos adicionais
+        // ^Começa string + apenas números + ponto + dígitos (* para ter um ou mais números) Fim string
         Pattern molde = Pattern.compile(regra);
         Matcher verifica = molde.matcher(texto);
 

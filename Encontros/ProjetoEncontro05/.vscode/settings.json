@@ -10,7 +10,4 @@
     "strings": "off",
     "other": "off"
   },
-  "editor.suggestOnTriggerCharacters": false,
-  "editor.parameterHints.enabled": false
-
 }
