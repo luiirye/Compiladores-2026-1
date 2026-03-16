@@ -7,6 +7,7 @@ public class questao07 extends Base {
     public void executar(){
 
         String texto = "CPF: 123.456.789-00";
+        //saída espera: CPF: ***.***.***-00
         String regra = "\\d\\d+";
 
         Pattern p = Pattern.compile(regra);
