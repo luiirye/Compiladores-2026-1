@@ -4,4 +4,13 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ]
+    ,
+  "editor.quickSuggestions": {
+    "comments": "off",
+    "strings": "off",
+    "other": "off"
+  },
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.parameterHints.enabled": false
+
 }

@@ -1,29 +1,26 @@
 package AtividadePraticaExpressoesRegulares.Parte01;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern; 
+import java.util.regex.Matcher; // Verificador
+import java.util.regex.Pattern; // Molde
 
-public class questao01 {
 
+public class questao01 extends Base {
+
+    //@Override
     public void executar(){
-        String texto = "1234510-11";
+        
+        String texto = "1234a510";
+        String regra = "^[0-9]+$"; // ^ -> início da string, $ -> fim da string, [0-9] -> dígitos de 0 a 9, {6} -> exatamente 6 dígitos
 
-        //Expressão regular para números
-        String regex = "^[0-9]+$";
-        // ^ indica o começo da string
-        // $ indica o fim da string
+        Pattern molde = Pattern.compile(regra);
+        Matcher verifica = molde.matcher(texto);
 
-        // Compila a exmpressão regular
-        Pattern pattern = Pattern.compile(regex);
-
-        Matcher matcher = pattern.matcher(texto);
-
-        System.out.println("String analisada é: " + texto);
-        if(matcher.matches() == true){
-            System.out.println("A string contém apenas números");
-
+        System.out.println("String analisada: "+texto);
+        
+        if(verifica.matches()){
+            System.out.println("O texto só tem números positivos");
         } else {
-            System.out.println("A string contém outros caracteres");
+            System.out.println("O texto não possui apenas números");
         }
     }
 }

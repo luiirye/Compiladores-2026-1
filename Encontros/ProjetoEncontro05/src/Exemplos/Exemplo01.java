@@ -35,5 +35,4 @@ public class Exemplo01 extends BaseExemplo {
             System.out.println("A string contém outros caracteres.");
         }
     }
-    
 }
