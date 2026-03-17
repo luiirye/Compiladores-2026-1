@@ -8,16 +8,14 @@ public class questao08 extends Base {
 
         String texto = "Telefone: (67) 99876-1234";
         //saída espera: Telefone: (67) 9****-1234
-        String regra = "\\d\\d+";
+        String regra = "\\((\\d{2})\\) (\\d{5})-(\\d{4})";
 
         Pattern p = Pattern.compile(regra);
         Matcher m = p.matcher(texto);
 
-        System.out.println("A string analisada é: " + texto);
-        System.out.println("Números encontrados no texto:");
+        String mascara = m.replaceAll("($1) 9****-$3");
 
-        while(m.find()){
-            System.out.println(m.group());
-        }
+        System.out.println("Número de telefone: " + texto);
+        System.out.println("Telefone mascarado: " + mascara);
     }
 }

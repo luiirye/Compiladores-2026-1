@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class questao05 extends Base {
     public void executar(){
 
-        String texto = "Maria tem 23 anos e comprou 5 livros por 120 reais.";
-        String regra = "\\d\\d+";
+        String texto = "Maria tem 23 anos e comprou 5 2000 232 livros por 120 reais.";
+        String regra = "\\d{2,9}";
 
         Pattern p = Pattern.compile(regra);
         Matcher m = p.matcher(texto);

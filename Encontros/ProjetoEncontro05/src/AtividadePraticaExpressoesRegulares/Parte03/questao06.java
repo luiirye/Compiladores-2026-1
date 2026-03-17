@@ -3,11 +3,11 @@ package AtividadePraticaExpressoesRegulares.Parte03;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class questao05 extends Base {
+public class questao06 extends Base {
     public void executar(){
 
         String texto = "Evento: 25/10/2024";
-        String regra = "\\d\\d+";
+        String regra = "\\d{2,4}";
 
         Pattern p = Pattern.compile(regra);
         Matcher m = p.matcher(texto);
