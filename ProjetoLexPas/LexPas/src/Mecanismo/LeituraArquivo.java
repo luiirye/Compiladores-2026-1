@@ -1,4 +1,5 @@
 package Mecanismo;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class LeituraArquivo {
     }
     
     public void carregarArquivoParaLeitor() {
+        System.out.println("----------------------------------");
         System.out.println("### Carregar arquivo para testes ###");
 
         // Para receber entrada do teclado do usuário

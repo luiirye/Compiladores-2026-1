@@ -30,7 +30,8 @@ public class BufferPrimario {
                 bufferPrimario.add(linha);
             }
         }
-        catch(IOException ex) {
+        catch(IOException e) {
+            System.err.println("Erro ao fechar o arquivo.");
             System.err.println();
         }
         finally {
@@ -40,6 +41,7 @@ public class BufferPrimario {
                 }
 
                 catch (IOException e) {
+                    System.err.println("Erro ao fechar o arquivo.");
                     System.err.println(e);
                 }
             }
