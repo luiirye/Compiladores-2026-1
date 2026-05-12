@@ -13,5 +13,6 @@ public enum TokenType {
     DELIM,
     SYMBOL,
     EOF,
-    UNKNOWN
+    UNKNOWN,
+    CHARACTER
 }
