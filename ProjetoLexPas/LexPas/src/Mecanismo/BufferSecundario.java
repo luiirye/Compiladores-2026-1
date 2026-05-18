@@ -9,115 +9,106 @@ import Dominio.Token;
 import Dominio.TokenType;
 
 public class BufferSecundario {
+    private ArrayList<String> bufferPrimario;
 
-    public ArrayList<String> BufferPrimario;
+    private ArrayList<Token> bufferSecundario;
 
-    public ArrayList<Token> BufferSecundario;
-
-    public ArrayList<Token> getBufferSecundario() {
-        return this.BufferSecundario;
+    public ArrayList<Token> getBufferSecundario(){
+        return this.bufferSecundario;
     }
 
-    public BufferSecundario(ArrayList<String> buffer) {
-        this.BufferPrimario = buffer;
+    public BufferSecundario(ArrayList<String> buffer){
+        this.bufferPrimario = buffer;
     }
 
-    // MÉTODOS RESPONSÁVEIS POR AVALIAR EXPRESSÕES REGULARES
-
-    private Boolean IsCharacter(String valor) {
+    private Boolean IsCharacter(String valor){
         Pattern patt = Pattern.compile(PadroesLexicos.CHARACTER);
-        Matcher match = patt.matcher(valor); // Valor pega um possível lexema
-        return match.find();
+        Matcher mat = patt.matcher(valor);
+        return mat.find();
     }
 
-    private Boolean IsIdentifier(String valor) {
+    private Boolean IsIdentifier(String valor){
         Pattern patt = Pattern.compile(PadroesLexicos.IDENTIFIER);
-        Matcher match = patt.matcher(valor);
-        return match.find();
+        Matcher mat = patt.matcher(valor);
+        return mat.find();
     }
 
-    private Boolean IsLIteral(String valor) {
+    private Boolean IsLiteral(String valor){
         Pattern patt = Pattern.compile(PadroesLexicos.LITERAL);
-        Matcher match = patt.matcher(valor);
-        return match.find();
+        Matcher mat = patt.matcher(valor);
+        return mat.find();
     }
 
-    private Boolean IsNumber(String valor) {
+    private Boolean IsNumber(String valor){
         Pattern patt = Pattern.compile(PadroesLexicos.NUMBER);
-        Matcher match = patt.matcher(valor);
-        return match.find();
+        Matcher mat = patt.matcher(valor);
+        return mat.find();
     }
 
-    public void processarBufferSecundario() {
-        // Necessita de todas as expressões importantes para o regex
-        // É precisso concatenar as expressões menos importantes
-            String capture = 
-                PadroesLexicos.COMMENT + "|" + 
-                PadroesLexicos.NUMBER + "|" +
-                PadroesLexicos.LITERAL + "|" +
-                PadroesLexicos.WORDS + "|" + 
-                PadroesLexicos.CHARACTER +  "|";
-                // PIPE = OU
+    public void processarBufferSecundario(){
+        String capture = 
+                        PadroesLexicos.COMMENT + "|" +
+                        PadroesLexicos.NUMBER + "|" +
+                        PadroesLexicos.LITERAL + "|" + 
+                        PadroesLexicos.WORDS + "|" + 
+                        PadroesLexicos.CHARACTER;
         
-        this.BufferSecundario = new ArrayList<>();
-        
-        // Armazenar todos os lexemas
+        this.bufferSecundario = new ArrayList<>();
 
-        ArrayList<String> lexemasProcessados= new ArrayList<>();
+        ArrayList<String> lexemasProcessados = new ArrayList<>();
 
         Pattern patt = Pattern.compile(capture);
 
         int linha = 1;
 
-        for (String texto: this.BufferPrimario) {
-            Matcher match = patt.matcher(texto);
+        for (String texto : bufferPrimario) {
+            Matcher mat = patt.matcher(texto);
             Token valor = null;
+            while(mat.find()){
+                String lexema = mat.group();
+                int posicao = mat.start();
 
-            while(match.find()) {
-                String lexema = match.group();
-                int posicao = match.start();
-                if ((lexema.startsWith("//")) || (lexema.startsWith("(*"))) {
+                if ((lexema.startsWith("//")) || (lexema.startsWith("(*"))){
                     continue;
                 }
 
-                if (!lexemasProcessados.contains(lexema)) {
+                if (lexemasProcessados.contains(lexema) == false){
                     lexemasProcessados.add(lexema);
-                    if (TabelaSimboloLinguagem.contem(lexema)) {
+
+                    if (TabelaSimboloLinguagem.contem(lexema)){
                         TokenType tipo = TabelaSimboloLinguagem.buscar(lexema);
                         valor = new Token(tipo, lexema, linha, posicao);
-                        
                     }
-
-                    else if (this.IsCharacter(lexema)) {
+                    else if (this.IsCharacter(lexema)){
                         valor = new Token(TokenType.CHARACTER, lexema, linha, posicao);
                     }
-                    else if (this.IsIdentifier(lexema)) {
+                    else if (this.IsIdentifier(lexema)){
                         valor = new Token(TokenType.IDENTIFIER, lexema, linha, posicao);
                     }
-                    else if (this.IsLIteral(lexema)) {
+                    else if (this.IsLiteral(lexema)){
                         valor = new Token(TokenType.LITERAL, lexema, linha, posicao);
                     }
-                    else if (this.IsNumber(lexema)) {
+                    else if (this.IsNumber(lexema)){
                         valor = new Token(TokenType.NUMBER, lexema, linha, posicao);
                     }
-
-                    else {
-                        valor = new Token(TokenType.NUMBER, lexema, linha, posicao);
+                    else{
+                        valor = new Token(TokenType.UNKNOWN, lexema, linha, posicao);
                     }
-                    this.BufferSecundario.add(valor);
+                    this.bufferSecundario.add(valor);
                 }
-            
             }
             linha++;
-        }       
+        }
     }
+
     public void imprimirConteudoBufferSecundario(Boolean flag){
-        if (flag) {
-            System.out.println("------------------------------------------------------------------------------------");
-            System.out.println("### Conteúdo do Buffer Secundario:");
-            for (Token token : BufferSecundario) {
-                System.out.println(token);
+        if (flag == true){
+            System.out.println("-------------------------------------");
+            System.out.println("### Conteúdo do Buffer Secundário ###");
+            for (Token tk : this.bufferSecundario) {
+                System.out.println(tk);
             }
+            System.out.println("-------------------------------------");
         }
     }
 }

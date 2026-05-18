@@ -13,6 +13,6 @@ public class TesteLeitura{
 
     public void executar(){
         LeitorComTratamento leitor = new LeitorComTratamento();
-        leitor.lerArquivo("C:\\Users\\Docker\\Documents\\teste2.txt");
+        leitor.lerArquivo("c:\\temp\\existe.txt");
     }
 }

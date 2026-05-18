@@ -119,7 +119,7 @@ public class TabelaSimboloLinguagem {
             "write",
             "writeln",
             "xor",
-            "yellow",
+            "yellow"
         };
         
         for(String palavra : palavrasReservadas){

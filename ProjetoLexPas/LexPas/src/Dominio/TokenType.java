@@ -1,6 +1,7 @@
 package Dominio;
 
 public enum TokenType {
+    CHARACTER,
     LITERAL,
     NUMBER,
     STRING,
@@ -13,6 +14,5 @@ public enum TokenType {
     DELIM,
     SYMBOL,
     EOF,
-    UNKNOWN,
-    CHARACTER
+    UNKNOWN
 }

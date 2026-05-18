@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BufferPrimario {
-    
     private BufferedReader leitor;
 
     private ArrayList<String> bufferPrimario;
@@ -14,33 +13,25 @@ public class BufferPrimario {
         return bufferPrimario;
     }
 
-    // Construtor da classe
-    public BufferPrimario(BufferedReader leitor) {
+    public BufferPrimario(BufferedReader leitor){
         this.leitor = leitor;
     }
-
-    public void processarDadosDoBufferPrimario() {
-        
-        // Inicializando a coleção do ArrayList
+    
+    public void processarArquivoNoBufferPrimario(){
         this.bufferPrimario = new ArrayList<>();
-
         try {
-            String linha;
-            while ((linha = this.leitor.readLine()) != null) {
-                bufferPrimario.add(linha);
-            }
-        }
-        catch(IOException e) {
-            System.err.println("Erro ao fechar o arquivo.");
-            System.err.println();
-        }
-        finally {
-            if (this.leitor != null ){
+            String linha = "";
+            while((linha = this.leitor.readLine()) != null){
+                this.bufferPrimario.add(linha);
+            }            
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar o arquivo.");
+            System.err.println(e);
+        } finally {
+            if(this.leitor != null){
                 try {
                     this.leitor.close();
-                }
-
-                catch (IOException e) {
+                } catch (IOException e) {
                     System.err.println("Erro ao fechar o arquivo.");
                     System.err.println(e);
                 }
@@ -49,17 +40,12 @@ public class BufferPrimario {
     }
 
     public void imprimirConteudoDoBufferPrimario(Boolean flag){
-        
-        // Apenas a variável dentro do if, interprata-se como flag == true, po exemplo
-
-        if (flag) {
-            System.out.println("### Conteúdo do Buffer Primário ###");
-
-            // Para ler um array, utiliza-se um for eache
-            for (String texto : this.bufferPrimario) {
+        if (flag){
+            System.out.println("------------------------------------");
+            System.out.println("### Conteúdo do Buffer Primário: ###");
+            for (String texto : bufferPrimario) {
                 System.out.println(texto);
             }
         }
     }
-
 }
